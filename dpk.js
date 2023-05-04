@@ -1,10 +1,9 @@
-const crypto = require("crypto");
+const { encryptData } = require("./crypt");
 
+// Moved this constants to outter scope.
+// TODO: These constants maybe can come from a config file or lib.
 const TRIVIAL_PARTITION_KEY = "0";
 const MAX_PARTITION_KEY_LENGTH = 256;
-
-encryptData = (data) =>
-  crypto.createHash("sha3-512").update(data).digest("hex");
 
 exports.deterministicPartitionKey = (event) => {
   // If there'no event or it's falsy, then return the trivial key
