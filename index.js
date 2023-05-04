@@ -39,3 +39,13 @@ const { deterministicPartitionKey } = require("./dpk");
   const trivialKey = deterministicPartitionKey(event);
   console.log(trivialKey);
 }
+
+// When the partition key is not a string
+{
+  const event = {
+    data: "Anything",
+    partitionKey: { a: 1, b: 2 },
+  };
+
+  const trivialKey = deterministicPartitionKey(event);
+}

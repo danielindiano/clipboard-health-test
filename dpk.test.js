@@ -36,4 +36,14 @@ describe("deterministicPartitionKey", () => {
     const trivialKey = deterministicPartitionKey(event);
     expect(trivialKey).not.toBe(event.partitionKey);
   });
+
+  it("Returns a string version of partitionKey when it is not of string type", () => {
+    const event = {
+      data: "Anything",
+      partitionKey: { a: 1, b: 2 },
+    };
+
+    const trivialKey = deterministicPartitionKey(event);
+    expect(trivialKey).toBe('{"a":1,"b":2}');
+  });
 });
