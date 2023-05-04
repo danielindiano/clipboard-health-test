@@ -17,3 +17,4 @@ You will be graded on the exhaustiveness and quality of your unit tests, the dep
 5. Then I use some ternary expressions to have a cleaner code for the verification of event.partitionKey type
 6. And just before the returning of the function, I check for the MAX_PARTITION_KEY_LENGTH so I determine if encrypt the candidate or not.
 7. I also moved the crypt function to another file, so if the crypt approach changes, we do not need to change in the main function file.
+8. After all, I included more test cases with other basic situations. And added a try-catch block on main function to avoid exceptions on handling the crypt
