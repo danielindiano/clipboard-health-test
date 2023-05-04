@@ -15,14 +15,14 @@ exports.deterministicPartitionKey = (event) => {
     return encryptData(JSON.stringify(event));
   }
 
-  let candidate;
-  candidate = event.partitionKey;
-  if (typeof candidate !== "string") {
-    candidate = JSON.stringify(candidate);
-  }
-  if (candidate.length > MAX_PARTITION_KEY_LENGTH) {
-    candidate = encryptData(candidate);
-  }
+  // When event.partitionKey is not a string, we stringify it
+  const candidate =
+    typeof event.partitionKey === "string"
+      ? event.partitionKey
+      : JSON.stringify(event.partitionKey);
 
-  return candidate;
+  // Returns the candidate or it's encrypted hash when its length exceeds the max_partition_key_length
+  return candidate.length <= MAX_PARTITION_KEY_LENGTH
+    ? candidate
+    : encryptData(candidate);
 };
